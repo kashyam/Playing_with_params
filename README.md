@@ -108,44 +108,6 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
     _________________________________________________________________
     None
     Train on 50000 samples, validate on 10000 samples
-    Epoch 1/25
-     - 18s - loss: 2.1801 - acc: 0.1854 - val_loss: 1.9858 - val_acc: 0.3017
-    Epoch 2/25
-     - 16s - loss: 1.8220 - acc: 0.3482 - val_loss: 1.6961 - val_acc: 0.4086
-    Epoch 3/25
-     - 16s - loss: 1.5918 - acc: 0.4291 - val_loss: 1.5206 - val_acc: 0.4624
-    Epoch 4/25
-     - 28s - loss: 1.4719 - acc: 0.4738 - val_loss: 1.4388 - val_acc: 0.4885
-    Epoch 5/25
-     - 29s - loss: 1.4046 - acc: 0.5003 - val_loss: 1.3563 - val_acc: 0.5149
-    Epoch 6/25
-     - 30s - loss: 1.3269 - acc: 0.5287 - val_loss: 1.3144 - val_acc: 0.5388
-    Epoch 7/25
-     - 30s - loss: 1.2718 - acc: 0.5472 - val_loss: 1.2797 - val_acc: 0.5429
-    Epoch 8/25
-     - 30s - loss: 1.2160 - acc: 0.5691 - val_loss: 1.2185 - val_acc: 0.5681
-    Epoch 9/25
-     - 30s - loss: 1.1624 - acc: 0.5888 - val_loss: 1.1761 - val_acc: 0.5806
-    Epoch 10/25
-     - 29s - loss: 1.1112 - acc: 0.6072 - val_loss: 1.1470 - val_acc: 0.5946
-    Epoch 11/25
-     - 30s - loss: 1.0602 - acc: 0.6259 - val_loss: 1.1263 - val_acc: 0.5959
-    Epoch 12/25
-     - 29s - loss: 1.0186 - acc: 0.6400 - val_loss: 1.0926 - val_acc: 0.6118
-    Epoch 13/25
-     - 30s - loss: 0.9761 - acc: 0.6577 - val_loss: 1.0871 - val_acc: 0.6199
-    Epoch 14/25
-     - 30s - loss: 0.9335 - acc: 0.6712 - val_loss: 1.0437 - val_acc: 0.6291
-    Epoch 15/25
-     - 30s - loss: 0.8921 - acc: 0.6875 - val_loss: 1.0309 - val_acc: 0.6342
-    Epoch 16/25
-     - 30s - loss: 0.8456 - acc: 0.7034 - val_loss: 1.0271 - val_acc: 0.6397
-    Epoch 17/25
-     - 29s - loss: 0.8132 - acc: 0.7153 - val_loss: 1.0107 - val_acc: 0.6434
-    Epoch 18/25
-     - 30s - loss: 0.7741 - acc: 0.7290 - val_loss: 1.0134 - val_acc: 0.6466
-    Epoch 19/25
-     - 30s - loss: 0.7313 - acc: 0.7440 - val_loss: 1.0058 - val_acc: 0.6565
     Epoch 20/25
      - 30s - loss: 0.6918 - acc: 0.7579 - val_loss: 1.0063 - val_acc: 0.6565
     Epoch 21/25
