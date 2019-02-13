@@ -16,7 +16,7 @@ Optimizer -             SGD with Momentum(0.9)
 Regularizer -           Maxnorm Constraint (value clipped at 3 as this reported better perfromance , also to avoid gradient saturation.                         We will later see how using too much regularization has the penalizing effect on the model).  
   
   
-The code for all the models can be found in the [models](https://github.com/kashyam/Playing_with_params/tree/master/models)
+###### The code for all the models can be found in the [models](https://github.com/kashyam/Playing_with_params/tree/master/models)
   
    
    
