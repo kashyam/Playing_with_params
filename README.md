@@ -16,6 +16,10 @@ Optimizer -             SGD with Momentum(0.9)
 Regularizer -           Maxnorm Constraint (value clipped at 3 as this reported better perfromance , also to avoid gradient saturation.                         We will later see how using too much regularization has the penalizing effect on the model).  
   
   
+The code for all the models can be found in the [models](https://github.com/kashyam/Playing_with_params/master/models/)
+  
+   
+   
 ## Model_1 (Base Model)
   
 In the Base Model We have trained with the following parameter specifications. With inadequate regularization the model has turned out to be overfit. The gap between the Train/Val accuracies and losses can be clearly seen in the graph which gives us clear idea of what should be done to generalize the model.  
@@ -33,38 +37,7 @@ Val Accuracy   - 65.72
 
 ```
 # Simple CNN model for the CIFAR-10 Dataset
-import numpy
-from keras import callbacks
-from keras.datasets import cifar10
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import Flatten
-from keras.constraints import maxnorm
-from keras.optimizers import SGD
-from keras.layers import Conv2D
-from keras.layers import MaxPool2D
-from keras.utils import np_utils
-
-# fix random seed for reproducibility
-seed = 7
-numpy.random.seed(seed)
-
-# load data
-(X_train, y_train), (X_test, y_test) = cifar10.load_data()
-
-# normalize inputs from 0-255 to 0.0-1.0
-X_train = X_train.astype('float32')
-X_test = X_test.astype('float32')
-X_train = X_train / 255.0
-X_test = X_test / 255.0
-
-# one hot encode outputs
-y_train = np_utils.to_categorical(y_train)
-y_test = np_utils.to_categorical(y_test)
-num_classes = y_test.shape[1]
-
-# Create the model
+# MOdel Definition
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=(32, 32,3), padding='same', activation='relu', kernel_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
@@ -93,29 +66,7 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 # Fit the model
 seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=epochs, batch_size=256, verbose=2)
 
-# Final evaluation of the model
-scores = model.evaluate(X_test, y_test, verbose=1)
-print("Train Accuracy: %f" % (scores[1]*100))
-print("Train loss: %f" % (scores[0]))
 
-# visualizing losses and accuracy
-train_loss = seqModel.history['loss']
-val_loss = seqModel.history['val_loss']
-train_acc = seqModel.history['acc']
-val_acc = seqModel.history['val_acc']
-xc = range(epochs)
-
-# Plotting loss
-plt.figure()
-plt.plot(xc, train_loss, label='Train loss')
-plt.plot(xc, val_loss, label='Val loss')
-plt.legend()
-
-# Plotting Accuracy
-plt.figure()
-plt.plot(xc, train_acc, label='Train Acc')
-plt.plot(xc, val_acc, label='Val Acc')
-plt.legend()
 ```
 
     _________________________________________________________________
@@ -221,6 +172,7 @@ plt.legend()
   
   
   
+  
 ## Model_2 ( Dropout = 0.4 )  
   
 Since the base model showed tendency of variance, We try to generalize the model by increasing the dropout rate to 0.4 from 0.2. We could see the effect in the graph that the gap beween the training and validation curves have decreased.  
@@ -233,7 +185,7 @@ Batchnorm = Not Applied
 Kernel Regularizer = Not Applied  
   
 ###### Accuracy
-Train Accuracy - 83.12
+Train Accuracy - 83.12  
 Val Accuracy   - 76.45  
   
   
@@ -345,6 +297,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
+  
 ## Model_3 ( Batchnorm with Dropout = 0.2 )
   
 Now that We have tried reducing the variance by increasing the drouout rate. Let's see how adding a BatchNorm to the model performs with the old Dropout rate of 0.2. We can understand from below that Batchnorm has profound effect on the model. Althought it has has a regularization effect this has helped our model performance by increasing the accuracies. The train accuracy has crossed 90 and the Val accuracy has crossed 80 still **our model suffers from the overfit problem**.
@@ -364,7 +317,7 @@ Batchnorm = Yes
 Kernel Regularizer = Not Applied  
   
 ###### Accuracy
-Train Accuracy - 92.31
+Train Accuracy - 92.31  
 Val Accuracy   - 81.01  
   
   
@@ -475,6 +428,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
+  
 ## Model_4 ( Batchnorm without Dropout )
   
   
@@ -493,7 +447,7 @@ Batchnorm = Yes
 Kernel Regularizer = Not Applied  
   
 ###### Accuracy
-Train Accuracy - 100.00
+Train Accuracy - 100.00  
 Val Accuracy   - 79.67  
   
   
@@ -595,6 +549,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
+  
 ## Model_5 (Batchnorm with increased dropout at the later layers and epochs)
   
   
@@ -609,7 +564,7 @@ Batchnorm = Yes
 Kernel Regularizer = Not Applied  
   
 ###### Accuracy
-Train Accuracy - 81.91
+Train Accuracy - 81.91  
 Val Accuracy   - 81.71  
   
   
@@ -719,6 +674,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
+  
 ## Model_6 (Batchnorm with higher dropout at earlier layers)
   
   
@@ -733,7 +689,7 @@ Batchnorm = Yes
 Kernel Regularizer = Not Applied  
   
 ###### Accuracy
-Train Accuracy - 78.90
+Train Accuracy - 78.90  
 Val Accuracy   - 73.84  
 
 ```python
@@ -844,6 +800,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
+  
 ## Model_7 (Batchnorm with kernel regularizer alongside Droopout and kernel_constraint)
   
   
@@ -858,7 +815,7 @@ Batchnorm = Yes
 Kernel Regularizer = Yes  
   
 ###### Accuracy
-Train Accuracy - 77.77
+Train Accuracy - 77.77  
 Val Accuracy   - 73.31  
   
   
@@ -965,11 +922,13 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
 
 
 
-![png](output_12_3.png)
-
-
+![png](output_12_3.png)  
+  
+  
+  
+  
 ## Take Away
 
 By this playing_with_params we had a great insight of the hyperparameters that governs the performance of any Neural Network model. Indeed this is the artistic manipulation part of the scientific problem solving methods of Machine Learning. This play is more academically called as " Hyperparameter Tuning" in a much more comprehensive way.  
   
-** Model_5 ** seems to be the best of all the models we have tried here. We can keep trying this by tweaking the network in a more robust way to achieve even better performance. That can be don by creating a more complex and problem-specific models and choosing the right hyper_parameters. But to our rescue is the community of researchers who have worked tirelessly and invented many such architectures **( AlexNet, VGG, InceptionNet, Resnet, etc )** that could achive the state ot the art results. These models have proved to perform well on humangous dataset called **IMAGENET** making them more authentic and generalized for any kind of data.
+**Model_5** seems to be the best of all the models we have tried here. We can keep trying this by tweaking the network in a more robust way to achieve even better performance. That can be don by creating a more complex and problem-specific models and choosing the right hyper_parameters. But to our rescue is the community of researchers who have worked tirelessly and invented many such architectures **( AlexNet, VGG, InceptionNet, Resnet, etc )** that could achive the state ot the art results. These models have proved to perform well on humangous dataset called **IMAGENET** making them more authentic and generalized for any kind of data.
