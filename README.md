@@ -391,7 +391,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
-## Model_4 ( Batchnorm without Dropout )
+## Model_4 ( Batchnorm Without Dropout )
   
   
 We saw that batchnorm boosted the model performance by a huge margin but could not reduce the overfit. Also we were able to see the increased accuracies compared to the previous models. Now When we try to train the same model without dropout, the model tends to gain an accuracy of 100% during test while severly performing during the validation time. This is perfect example of the overfit model, where it has **morised the training data failing to generalize on the data the model hasn't seen**. This guides us that we have enough learning tendency but needed to be regularized. The train loss has reduced while the Val loss has increased. This could be well understood if we compore the loss_graph of model_3 and model_4. From the below loss comparison we can understand that the model is more prone to overfit without regularizing, showing a tendency of **reduced train loss and increased validation loss**. Hence regularization is an important aspect of any neural network model.
@@ -512,7 +512,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
-## Model_5 (Batchnorm with increased dropout at the later layers and epochs)
+## Model_5 (With increased dropout at the later layers and epochs = 50)
   
   
 Model_4 showed widening tendency between the training and Val accuracies despite increase in the performance. Such models will cost us more at the time of inference. Hence we try to drop more neurons along the depth of the model. This serves our purpose by making the model more realistic for inference by converging the train/val curves.  
@@ -637,10 +637,10 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
-## Model_6 (Batchnorm with higher dropout at earlier layers)
+## Model_6 (Higher dropout at earlier layers)
   
   
-Introducing dropout in the initial layers has detrimental effects on the model. This can be understood from the graphs that the Val curve looks more jittery because of losing more information lost even before learning any low level features (such as edges). WE can understand from this that this practice of dropping neurons in the early layers is not good and will increase the loss of the model.
+Introducing dropout in the initial layers has detrimental effects on the model. This can be understood from the graphs that the Val curve looks more jittery because of losing more information lost even before learning any low level features (such as edges). We can understand from this that this practice of dropping neurons in the early layers is not good practice and will increase the loss of the model.
   
   
 ###### Hyperparameters
@@ -763,7 +763,7 @@ seqModel = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=
   
   
   
-## Model_7 (Batchnorm with kernel regularizer alongside Droopout and kernel_constraint)
+## Model_7 (Introducing kernel regularizer alongside Dropout and kernel_constraint)
   
   
 Since our model with higher dropout in the initial layer did not seem to be opmistice, let's try to introduce kernel_regularizer which regulates the weights of the layers by adding the regularizer (L2 is used here) to the loss function. However it is not a good practice to use batchnorm alongside kernel regularizer as these two tend to have a counter intuitive effect on the model. This could be understood from the fact that training/val losses has the same path in the graph. Since we regularized the weights of the model and learning rate (0.001) the model tends to learn slow as we can see that the model has higher loss despite training for 75 epcohs. We can reduce the loss by increasing the epochs but this will not be optimum since the training will take more time. We can try to extract more performance by reducing the **regularizer parameter, removing batchnorm or reducing dropout, etc**  
