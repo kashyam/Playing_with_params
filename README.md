@@ -6,13 +6,13 @@ Playing with the params attempts to understand the implications of varying the h
   
 Type of network -       Convolutional Neural Network  
 Feature scaled values - 0 to 1  
-Number of layers -      6 to 10
+Number of layers -      6 to 10  
 Filter Size -           3x3 / 2x2  
 Padding -               SAME (preserving the dimension across convolution operations)  
-Stride -                1 
+Stride -                1  
 Activation -            Relu (Rectified Linear Unit - values clipped at a minimum of 0)  
 Loss Function -         Cross Entropy  
-Optimizer -             SGD with Momentum(0.9)
+Optimizer -             SGD with Momentum(0.9)  
 Regularizer -           Maxnorm Constraint (value clipped at 3 as this reported better perfromance , also to avoid gradient saturation.                         We will later see how using too much regularization has the penalizing effect on the model).  
   
   
